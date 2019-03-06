@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/annikaslund/express-routing-exercises/issues"
   },
-  "homepage": "https://github.com/annikaslund/express-routing-exercises#readme"
+  "homepage": "https://github.com/annikaslund/express-routing-exercises#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }

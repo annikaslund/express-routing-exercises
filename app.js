@@ -15,10 +15,10 @@ app.get('/mean', function(req, res, next){
             throw new ExpressError("Input must be integers", 400);
         }
     
-        let numsTotal = numsArr.length;
+        let arrLength = numsArr.length;
         let total = numsArr.reduce(function(acc, num){ return acc + num; })
 
-        let mean = total / numsTotal;
+        let mean = total / arrLength;
 
         return res.json({mean});
 
@@ -28,13 +28,32 @@ app.get('/mean', function(req, res, next){
 })
 
 
-// app.get('/median', function(req, res, next){
-//     try{
-
-//     } catch(err) {
+app.get('/median', function(req, res, next){
+    try{
+        let nums = req.query.nums;
+        let numsArr = nums.split(",").map(function(num){ return parseInt(num) });
         
-//     }
-// })
+        if(numsArr.includes(NaN)){
+            throw new ExpressError("Input must be integers", 400);
+        }
+        
+        let median;
+
+        let arrLength = numsArr.length;
+        if (arrLength % 2 === 0){
+            right = arrLength / 2;
+            left = right - 1;
+            median = (numsArr[right] + numsArr[left]) / 2;
+        } else {
+            median = numsArr[Math.floor(arrLength / 2)];
+        }
+
+        return res.json({median});
+
+    } catch(err) {
+        return next(err);
+    }
+})
 
 
 // app.get('/mode', function(req, res, next){
